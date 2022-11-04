@@ -7,6 +7,14 @@ import (
 	"github.com/wifecooky/gron/xtime"
 )
 
+// Some predefined schedules.
+var (
+	DAILY   = Every(1 * xtime.Day)
+	WEEKLY  = Every(1 * xtime.Week)
+	MONTHLY = Every(30 * xtime.Day)
+	YEARLY  = Every(365 * xtime.Day)
+)
+
 // Schedule is the interface that wraps the basic Next method.
 //
 // Next deduces next occurring time based on t and underlying states.

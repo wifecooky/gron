@@ -1,7 +1,7 @@
 # gron
-[![Build Status](https://semaphoreci.com/api/v1/roylee0704/gron/branches/master/badge.svg)](https://semaphoreci.com/roylee0704/gron)
-[![Go Report Card](https://goreportcard.com/badge/github.com/wifecooky/gron)](https://goreportcard.com/report/github.com/wifecooky/gron)
-[![GoDoc](https://godoc.org/github.com/wifecooky/gron?status.svg)](https://godoc.org/github.com/wifecooky/gron)
+
+> This repository is forked from [roylee0704/gron](https://github.com/roylee0704/gron)
+> Thanks for the great work!
 
 Gron provides a clear syntax for writing and deploying cron jobs.
 
@@ -19,6 +19,7 @@ $ go get github.com/wifecooky/gron
 ```
 
 ## Usage
+
 Create `schedule.go`
 
 ```go
