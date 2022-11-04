@@ -53,12 +53,13 @@ gron.Every(1*time.Minute)
 gron.Every(1*time.Hour)
 ```
 
-Also support `Day`, `Week` by importing `gron/xtime`:
-```go
-import "github.com/wifecooky/gron/xtime"
+Also provide some pre-defined schedules.
 
-gron.Every(1 * xtime.Day)
-gron.Every(1 * xtime.Week)
+```go
+gron.DAILY
+gron.WEEKLY
+gron.MONTHLY
+gron.YEARLY
 ```
 
 Schedule to run at specific time with `.At(hh:mm)`
