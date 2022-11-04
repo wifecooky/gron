@@ -119,42 +119,41 @@ package main
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/wifecooky/gron"
-	"github.com/wifecooky/gron/xtime"
 )
 
-type PrintJob struct{ Msg string }
+type printJob struct{ Msg string }
 
-func (p PrintJob) Run() {
+func (p printJob) Run() {
 	fmt.Println(p.Msg)
 }
 
 func main() {
 
 	var (
-		// schedules
-		daily     = gron.Every(1 * xtime.Day)
-		weekly    = gron.Every(1 * xtime.Week)
-		monthly   = gron.Every(30 * xtime.Day)
-		yearly    = gron.Every(365 * xtime.Day)
-
-		// contrived jobs
-		purgeTask = func() { fmt.Println("purge aged records") }
+		purgeTask = func() { fmt.Println("purge unwanted records") }
 		printFoo  = printJob{"Foo"}
 		printBar  = printJob{"Bar"}
 	)
 
 	c := gron.New()
 
-	c.Add(daily.At("12:30"), printFoo)
-	c.AddFunc(weekly, func() { fmt.Println("Every week") })
+	c.AddFunc(gron.Every(1*time.Hour), func() {
+		fmt.Println("Every 1 hour")
+	})
 	c.Start()
 
-	// Jobs may also be added to a running Gron
-	c.Add(monthly, printBar)
-	c.AddFunc(yearly, purgeTask)
+	c.AddFunc(gron.WEEKLY, func() { fmt.Println("Every week") })
+	c.Add(gron.DAILY.At("12:30"), printFoo)
+	c.Start()
 
-	// Stop Gron (running jobs are not halted).
-	c.Stop()
+	// Jobs may also be added to a running Cron
+	c.Add(gron.MONTHLY, printBar)
+	c.AddFunc(gron.YEARLY, purgeTask)
+
+	// Stop the scheduler (does not stop any jobs already running).
+	defer c.Stop()
 }
 ```
